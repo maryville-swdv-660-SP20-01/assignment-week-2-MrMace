@@ -103,3 +103,5 @@ ENV/
 # pytest
 .pytest_*/
 **/.pytest_/
+Pipfile
+Pipfile.lock
