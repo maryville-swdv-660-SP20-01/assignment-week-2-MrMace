@@ -72,3 +72,9 @@ class GameApiViewTests( TestCase ):
     # TODO: Add tests for Getting a game's solution
     # HINT: remember the `setUp` fixture that is in this test class,
     #   it constructs things that might be useful
+
+        def test_game_view_respond_404_when_id_not_found(self):
+            pass
+
+        def test_game_view_respond_game_solution_word_in_json_structure(self):
+            pass
