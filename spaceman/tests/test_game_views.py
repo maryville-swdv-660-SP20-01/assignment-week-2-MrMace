@@ -37,11 +37,11 @@ class GameApiViewTests( TestCase ):
     def test_game_view_should_create_new_game_on_POST( self ):
         response = game_view( self.request_factory.post('dummy') )
 
-        self.assertEquals( response.status_code, 200)
+        self.assertEqual( response.status_code, 200)
         self.assertIsNotNone( response.data['id'] )
         self.assertTrue( response.data['id'] >= 0 )
 
-    ### PUT (guess letter) view 
+    ### PUT (guess letter) view
     def test_game_view_should_create_update_guesses_on_PUT( self ):
         with patch.object( Game.objects, 'get' ) as mock_get:
             self.mock_game.letters_available = ['B','C']
@@ -50,10 +50,10 @@ class GameApiViewTests( TestCase ):
             mock_request = self.request_factory.put( 'dummy', json.dumps({'letters_guessed': ['B']}), content_type='application/json')
 
             response = game_view( mock_request, 25 )
-            
+
             mock_get.assert_called_with( pk=25 )
-            self.assertEquals( response.status_code, 200 )
-            self.assertEquals( response.data['letters_guessed'], ['A','B'])
+            self.assertEqual( response.status_code, 200 )
+            self.assertEqual( response.data['letters_guessed'], ['A','B'])
 
     def test_game_view_should_reject_PUT_if_invalid( self ):
         with patch.object( Game.objects, 'get' ) as mock_get:
@@ -63,13 +63,12 @@ class GameApiViewTests( TestCase ):
             mock_request = self.request_factory.put( 'dummy', json.dumps({'letters_guessed': ['A']}), content_type='application/json')
 
             response = game_view( mock_request, 25 )
-            
+
             mock_get.assert_called_with( pk=25 )
-            self.assertEquals( response.status_code, 400 )
+            self.assertEqual( response.status_code, 400 )
 
 
     ### GET solution view
     # TODO: Add tests for Getting a game's solution
-    # HINT: remember the `setUp` fixture that is in this test class, 
+    # HINT: remember the `setUp` fixture that is in this test class,
     #   it constructs things that might be useful
-
